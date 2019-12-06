@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="datePicker" type="android.view.View.OnClickListener"/>
+        <variable name="startTimePicker" type="android.view.View.OnClickListener"/>
+        <variable name="endTimePicker" type="android.view.View.OnClickListener"/>
+    </data>
+
+
+    <ScrollView
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_width="match_parent">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            <include layout="@layout/custom_toolbar"/>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1"
+                    android:orientation="horizontal">
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical">
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:drawableEnd="@drawable/ic_arrow_drop_down"
+                            android:id="@+id/schedule_date"
+                            android:fontFamily="sans-serif-medium"
+                            android:hint="@string/meeting_date"
+                            android:textSize="16dp"
+                            android:onClick="@{datePicker}"
+                            android:gravity="center|start"
+                            android:padding="16dp"
+                            android:layout_margin="16dp"
+                            android:background="@drawable/textview_background"/>
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:drawableEnd="@drawable/ic_arrow_drop_down"
+                            android:id="@+id/schedule_start_time"
+                            android:fontFamily="sans-serif-medium"
+                            android:hint="@string/start_time"
+                            android:textSize="16dp"
+                            android:onClick="@{startTimePicker}"
+                            android:gravity="center|start"
+                            android:padding="16dp"
+                            android:layout_margin="16dp"
+                            android:background="@drawable/textview_background"/>
+
+                </LinearLayout>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:drawableEnd="@drawable/ic_arrow_drop_down"
+                        android:id="@+id/schedule_end_time"
+                        android:fontFamily="sans-serif-medium"
+                        android:hint="@string/end_time"
+                        android:textSize="16dp"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="0.5"
+                        android:gravity="center|start"
+                        android:layout_marginRight="16dp"
+                        android:padding="16dp"
+                        android:onClick="@{endTimePicker}"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/textview_background"/>
+
+
+            </LinearLayout>
+
+
+
+
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="150dp"
+                    android:id="@+id/schedule_description"
+                    android:fontFamily="sans-serif-medium"
+                    android:inputType="textMultiLine"
+                    android:hint="@string/description"
+                    android:textSize="16dp"
+                    android:gravity="start"
+                    android:padding="16dp"
+                    android:layout_margin="16dp"
+                    android:background="@color/white"/>
+            <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/submit"
+                    android:text="@string/submit"
+                    android:textColor="@color/white"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/button_background"
+            />
+
+        </LinearLayout>
+    </ScrollView>
+</layout>
