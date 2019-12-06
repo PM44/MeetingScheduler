@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_add_schedule.*
 import java.util.*
 
 
-class AddSchedule : Fragment() {
+class AddScheduleScreen : Fragment() {
     private lateinit var databinding: FragmentAddScheduleBinding
     private lateinit var viewModel: AddScheduleViewModel
     lateinit var progress: ProgressDialog
@@ -46,7 +46,7 @@ class AddSchedule : Fragment() {
         setup()
         previous_day.setOnClickListener {
             Navigation.findNavController(view)
-                .navigate(AddScheduleDirections.actionAddScheduleToListViewFragment())
+                .navigate(AddScheduleScreenDirections.actionAddScheduleToListViewFragment())
         }
         databinding.setDatePicker {
             setCalenderDate()

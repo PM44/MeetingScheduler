@@ -8,7 +8,7 @@
               android:label="fragment_list_view" tools:layout="@layout/fragment_list_view">
         <action android:id="@+id/action_listViewFragment_to_addSchedule" app:destination="@id/addSchedule"/>
     </fragment>
-    <fragment android:id="@+id/addSchedule" android:name="com.example.meetingscheduler.view.AddSchedule"
+    <fragment android:id="@+id/addSchedule" android:name="com.example.meetingscheduler.view.AddScheduleScreen"
               android:label="fragment_add_schedule" tools:layout="@layout/fragment_add_schedule">
         <action android:id="@+id/action_addSchedule_to_listViewFragment" app:destination="@id/listViewFragment"/>
     </fragment>
