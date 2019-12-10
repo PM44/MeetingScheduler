@@ -133,6 +133,7 @@ class AddScheduleScreen : Fragment() {
     }
 
     fun startTimeDatePicker(view: View) {
+        schedule_end_time.text=""
         val c = Calendar.getInstance()
         val hour = c.get(Calendar.HOUR)
         val minute = c.get(Calendar.MINUTE)
@@ -165,7 +166,10 @@ class AddScheduleScreen : Fragment() {
                         .show();
                 } else {
                     if (startHour <= h) {
-                        if (startHour == h && startMinute < m) {
+                        if ((startHour == h) && (startMinute > m)) {
+                            Toast.makeText(activity, "Start time should be less than end time", Toast.LENGTH_SHORT)
+                                .show();
+                        } else {
                             if (m % 30 == 0 || m % 60 == 0)
                                 schedule_end_time.text = h.toString() + " : " + m.toString()
                             else {
@@ -176,9 +180,6 @@ class AddScheduleScreen : Fragment() {
                                 )
                                     .show();
                             }
-                        } else {
-                            Toast.makeText(activity, "Start time should be less than end time", Toast.LENGTH_SHORT)
-                                .show();
                         }
                     } else {
                         Toast.makeText(activity, "Start time should be less than end time", Toast.LENGTH_SHORT)
