@@ -135,7 +135,7 @@ class AddScheduleScreen : Fragment() {
         val minute = c.get(Calendar.MINUTE)
 
         val tpd = TimePickerDialog(activity, TimePickerDialog.OnTimeSetListener(function = { view, h, m ->
-            if (h < 9 && h > 18) {
+            if (h < 9 || h > 18) {
                 Toast.makeText(activity, "Office timings are between 9:00A.M to 6:00 P.M", Toast.LENGTH_SHORT).show();
             } else {
                 if (m % 30 == 0 || m % 60 == 0)
