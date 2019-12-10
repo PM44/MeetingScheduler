@@ -24,6 +24,9 @@ class AddScheduleScreen : Fragment() {
     private lateinit var databinding: FragmentAddScheduleBinding
     private lateinit var viewModel: AddScheduleViewModel
     lateinit var progress: ProgressDialog
+    var startHour: Int = -1
+    var startMinute: Int = -1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -135,6 +138,8 @@ class AddScheduleScreen : Fragment() {
         val minute = c.get(Calendar.MINUTE)
 
         val tpd = TimePickerDialog(activity, TimePickerDialog.OnTimeSetListener(function = { view, h, m ->
+            startHour = h
+            startMinute = m
             if (h < 9 || h > 18) {
                 Toast.makeText(activity, "Office timings are between 9:00A.M to 6:00 P.M", Toast.LENGTH_SHORT).show();
             } else {
@@ -149,25 +154,46 @@ class AddScheduleScreen : Fragment() {
     }
 
     fun endTimeDatePicker(view: View) {
-        val c = Calendar.getInstance()
-        val hour = c.get(Calendar.HOUR)
-        val minute = c.get(Calendar.MINUTE)
+        if (!schedule_start_time.text.toString().trim().isNullOrEmpty()) {
+            val c = Calendar.getInstance()
+            val hour = c.get(Calendar.HOUR)
+            val minute = c.get(Calendar.MINUTE)
 
-        val tpd = TimePickerDialog(activity, TimePickerDialog.OnTimeSetListener(function = { view, h, m ->
-            if (h < 9 || h > 18) {
-                Toast.makeText(activity, "Office timings are between 9:00A.M to 6:00 P.M", Toast.LENGTH_SHORT).show();
-            } else {
-                if (m % 30 == 0 || m % 60 == 0)
-                    schedule_end_time.text = h.toString() + " : " + m.toString()
-                else {
-                    Toast.makeText(activity, "Please Select time in multiple of 30 minutes", Toast.LENGTH_SHORT).show();
+            val tpd = TimePickerDialog(activity, TimePickerDialog.OnTimeSetListener(function = { view, h, m ->
+                if (h < 9 || h > 18) {
+                    Toast.makeText(activity, "Office timings are between 9:00A.M to 6:00 P.M", Toast.LENGTH_SHORT)
+                        .show();
+                } else {
+                    if (startHour <= h) {
+                        if (startHour == h && startMinute < m) {
+                            if (m % 30 == 0 || m % 60 == 0)
+                                schedule_end_time.text = h.toString() + " : " + m.toString()
+                            else {
+                                Toast.makeText(
+                                    activity,
+                                    "Please Select time in multiple of 30 minutes",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show();
+                            }
+                        } else {
+                            Toast.makeText(activity, "Start time should be less than end time", Toast.LENGTH_SHORT)
+                                .show();
+                        }
+                    } else {
+                        Toast.makeText(activity, "Start time should be less than end time", Toast.LENGTH_SHORT)
+                            .show();
+                    }
                 }
-            }
 
 
-        }), hour, minute, true)
+            }), hour, minute, true)
 
 
-        tpd.show()
+            tpd.show()
+        } else {
+            Toast.makeText(activity, "Please Select start time first", Toast.LENGTH_SHORT)
+                .show();
+        }
     }
 }
